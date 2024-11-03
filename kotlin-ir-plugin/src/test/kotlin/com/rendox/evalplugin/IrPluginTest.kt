@@ -16,48 +16,49 @@
 
 @file:OptIn(ExperimentalCompilerApi::class)
 
-package com.bnorm.template
+package com.rendox.evalplugin
 
 import com.tschuchort.compiletesting.JvmCompilationResult
 import com.tschuchort.compiletesting.KotlinCompilation
 import com.tschuchort.compiletesting.SourceFile
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
-import kotlin.test.assertEquals
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Test
+import kotlin.test.assertEquals
 
 class IrPluginTest {
-  @Test
-  fun `IR plugin success`() {
-    val result = compile(
-      sourceFile = SourceFile.kotlin(
-        "main.kt", """
+    @Test
+    fun `IR plugin success`() {
+        val result = compile(
+            sourceFile = SourceFile.kotlin(
+                "main.kt",
+                """
 fun main() {
   println(debug())
 }
 
 fun debug() = "Hello, World!"
-"""
-      )
-    )
-    assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
-  }
+""",
+            ),
+        )
+        assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
+    }
 }
 
 fun compile(
-  sourceFiles: List<SourceFile>,
-  plugin: CompilerPluginRegistrar = TemplateCompilerRegistrar(),
+    sourceFiles: List<SourceFile>,
+    plugin: CompilerPluginRegistrar = TemplateCompilerRegistrar(),
 ): JvmCompilationResult {
-  return KotlinCompilation().apply {
-    sources = sourceFiles
-    compilerPluginRegistrars = listOf(plugin)
-    inheritClassPath = true
-  }.compile()
+    return KotlinCompilation().apply {
+        sources = sourceFiles
+        compilerPluginRegistrars = listOf(plugin)
+        inheritClassPath = true
+    }.compile()
 }
 
 fun compile(
-  sourceFile: SourceFile,
-  plugin: CompilerPluginRegistrar = TemplateCompilerRegistrar(),
+    sourceFile: SourceFile,
+    plugin: CompilerPluginRegistrar = TemplateCompilerRegistrar(),
 ): JvmCompilationResult {
-  return compile(listOf(sourceFile), plugin)
+    return compile(listOf(sourceFile), plugin)
 }
