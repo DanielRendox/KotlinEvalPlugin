@@ -28,3 +28,11 @@ gradlePlugin {
         }
     }
 }
+
+ktlint {
+    filter {
+        exclude { entry ->
+            entry.file.toString().contains("generated")
+        }
+    }
+}

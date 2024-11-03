@@ -20,3 +20,11 @@ buildConfig {
     packageName(group.toString())
     buildConfigField("String", "KOTLIN_PLUGIN_ID", "\"${rootProject.extra["kotlin_plugin_id"]}\"")
 }
+
+ktlint {
+    filter {
+        exclude { entry ->
+            entry.file.toString().contains("generated")
+        }
+    }
+}
