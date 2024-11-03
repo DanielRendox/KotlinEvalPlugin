@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 
 @AutoService(CommandLineProcessor::class)
-class TemplateCommandLineProcessor : CommandLineProcessor {
+class EvalCommandLineProcessor : CommandLineProcessor {
     companion object {
         private const val OPTION_STRING = "string"
         private const val OPTION_FILE = "file"

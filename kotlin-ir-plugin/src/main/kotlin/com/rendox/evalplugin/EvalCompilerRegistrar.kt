@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.jetbrains.kotlin.config.CompilerConfiguration
 
 @AutoService(CompilerPluginRegistrar::class)
-class TemplateCompilerRegistrar(
+class EvalCompilerRegistrar(
     private val defaultString: String,
     private val defaultFile: String,
 ) : CompilerPluginRegistrar() {
@@ -41,9 +41,9 @@ class TemplateCompilerRegistrar(
 
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
         val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
-        val string = configuration.get(TemplateCommandLineProcessor.ARG_STRING, defaultString)
-        val file = configuration.get(TemplateCommandLineProcessor.ARG_FILE, defaultFile)
+        val string = configuration.get(EvalCommandLineProcessor.ARG_STRING, defaultString)
+        val file = configuration.get(EvalCommandLineProcessor.ARG_FILE, defaultFile)
 
-        IrGenerationExtension.registerExtension(TemplateIrGenerationExtension(messageCollector, string, file))
+        IrGenerationExtension.registerExtension(EvalIrGenerationExtension(messageCollector, string, file))
     }
 }

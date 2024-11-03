@@ -33,12 +33,13 @@ class IrPluginTest {
             sourceFile = SourceFile.kotlin(
                 "main.kt",
                 """
-fun main() {
-  println(debug())
-}
-
-fun debug() = "Hello, World!"
-""",
+                    fun main() {
+                        // evalAdd(1, 2) must be evaluated as 3
+                        println(evalAdd(1, 2))
+                    }
+                    
+                    fun evalAdd(a: Int, b: Int) = a + b
+                """.trimIndent(),
             ),
         )
         assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
@@ -47,7 +48,7 @@ fun debug() = "Hello, World!"
 
 fun compile(
     sourceFiles: List<SourceFile>,
-    plugin: CompilerPluginRegistrar = TemplateCompilerRegistrar(),
+    plugin: CompilerPluginRegistrar = EvalCompilerRegistrar(),
 ): JvmCompilationResult {
     return KotlinCompilation().apply {
         sources = sourceFiles
@@ -58,7 +59,7 @@ fun compile(
 
 fun compile(
     sourceFile: SourceFile,
-    plugin: CompilerPluginRegistrar = TemplateCompilerRegistrar(),
+    plugin: CompilerPluginRegistrar = EvalCompilerRegistrar(),
 ): JvmCompilationResult {
     return compile(listOf(sourceFile), plugin)
 }

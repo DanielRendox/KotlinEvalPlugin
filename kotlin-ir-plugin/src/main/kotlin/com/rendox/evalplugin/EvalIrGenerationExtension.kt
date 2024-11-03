@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
-class TemplateIrGenerationExtension(
+class EvalIrGenerationExtension(
     private val messageCollector: MessageCollector,
     private val string: String,
     private val file: String,
