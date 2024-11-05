@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi
 import org.junit.Test
 import java.io.File
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -35,7 +36,7 @@ class IrPluginTest {
         assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
 
         val irDumpContent = getDumpFilePath(result).readText()
-        assertTrue(irDumpContent.contains("CONST Int type=kotlin.Int value=3"))
+        assertContains(irDumpContent, "CONST Int type=kotlin.Int value=3")
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=1"))
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=2"))
     }
@@ -58,7 +59,7 @@ class IrPluginTest {
         assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
 
         val irDumpContent = getDumpFilePath(result).readText()
-        assertTrue(irDumpContent.contains("CONST Int type=kotlin.Int value=6"))
+        assertContains(irDumpContent, "CONST Int type=kotlin.Int value=6")
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=10"))
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=4"))
     }
@@ -81,7 +82,7 @@ class IrPluginTest {
         assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
 
         val irDumpContent = getDumpFilePath(result).readText()
-        assertTrue(irDumpContent.contains("CONST Int type=kotlin.Int value=15"))
+        assertContains(irDumpContent, "CONST Int type=kotlin.Int value=15")
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=3"))
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=5"))
     }
@@ -104,7 +105,7 @@ class IrPluginTest {
         assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
 
         val irDumpContent = getDumpFilePath(result).readText()
-        assertTrue(irDumpContent.contains("CONST Int type=kotlin.Int value=5"))
+        assertContains(irDumpContent, "CONST Int type=kotlin.Int value=5")
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=20"))
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=4"))
     }
@@ -127,7 +128,7 @@ class IrPluginTest {
         assertEquals(KotlinCompilation.ExitCode.OK, result.exitCode)
 
         val irDumpContent = getDumpFilePath(result).readText()
-        assertTrue(irDumpContent.contains("CONST Int type=kotlin.Int value=3"))
+        assertContains(irDumpContent, "CONST Int type=kotlin.Int value=3")
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=23"))
         assertFalse(irDumpContent.contains("CONST Int type=kotlin.Int value=5"))
     }
